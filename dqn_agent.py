@@ -36,6 +36,7 @@ class Agent():
         self.t_step = 0
 
     def step(self, state, action, reward, next_state, done):
+        """Save experience in replay memory, and learn every UPDATE_EVERY steps."""
         self.memory.add(state, action, reward, next_state, done)
 
         self.t_step = (self.t_step + 1) % UPDATE_EVERY
@@ -45,6 +46,13 @@ class Agent():
                 self.learn(experiences, GAMMA)
 
     def act(self, state, eps=0.):
+        """Return action for given state using epsilon-greedy policy.
+
+        Params
+        ======
+            state (array_like): current state
+            eps (float): epsilon, for epsilon-greedy action selection
+        """
         state = torch.from_numpy(state).float().unsqueeze(0).to(device)
         # Switch to evaluation mode for inference
         self.qnetwork_local.train(False)
