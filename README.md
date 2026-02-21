@@ -1,5 +1,7 @@
 # Navigation — Deep Reinforcement Learning
 
+**Author**: Tim Wilcoxson
+
 A Double DQN agent with Dueling network architecture that learns to collect yellow bananas (+1 reward) while avoiding blue bananas (-1 reward) in a Unity ML-Agents environment.
 
 ## Environment
