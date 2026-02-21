@@ -42,7 +42,7 @@ A Double DQN agent with Dueling network architecture that learns to collect yell
    conda activate drlnd-nav
    ```
 
-3. Install dependencies:
+3. Install dependencies (includes PyTorch, NumPy, Jupyter, and all other required packages):
    ```bash
    cd python
    pip install .
@@ -58,6 +58,13 @@ A Double DQN agent with Dueling network architecture that learns to collect yell
    - [macOS](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana.app.zip)
    - [Linux](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux.zip)
    - [Windows 64-bit](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Windows_x86_64.zip)
+
+   **macOS users**: After unzipping, remove the quarantine attribute so the app can launch:
+   ```bash
+   xattr -cr Banana.app
+   ```
+
+   **Linux/Windows users**: Update the `file_name` path in the notebook's environment initialization cell to match your downloaded binary (e.g., `"Banana_Linux/Banana.x86_64"`).
 
 ## Training
 
