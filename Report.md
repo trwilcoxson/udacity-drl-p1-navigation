@@ -85,6 +85,8 @@ The shared first layer (128 units, wider than the standard 64) accommodates the 
 | Soft update rate (τ) | 0.001 | Slow blending for target stability |
 | Learning rate | 5e-4 | Adam optimizer, well-tested for DQN |
 | Update frequency | Every 4 steps | Balances learning frequency vs stability |
+| Shared layer (fc1) | 128 units | Wider than standard 64, accommodates 37-dim state |
+| Stream layers (fc2) | 64 units | Each value/advantage stream hidden layer |
 | Epsilon start | 1.0 | Full exploration initially |
 | Epsilon end | 0.01 | Maintains minimal exploration |
 | Epsilon decay | 0.995 | Reaches ~0.01 by episode 920 |
@@ -93,7 +95,7 @@ The shared first layer (128 units, wider than the standard 64) accommodates the 
 
 ![Training Scores](scores_plot.png)
 
-The plot shows the score per episode (light) and the 100-episode rolling average (dark). The agent solved the environment in **377 episodes** (average score >= 13.0 first achieved at episode 477), well under the 1,800-episode target. Training continued to reach a robust average of **15.05** at episode 938.
+The plot shows the score per episode (light) and the 100-episode rolling average (dark). The environment was **solved at episode 477**, when the 100-episode rolling average first exceeded 13.0. This is well under the 1,800-episode target. Training continued to reach a robust average of **15.05** at episode 938.
 
 **Training dynamics**: Scores start near 0 (random policy), begin climbing around episode 100 as the replay buffer fills and epsilon decays. By episode 300, the average reaches ~7.7, and scores accelerate as the agent masters banana discrimination. Performance continues improving past the 13.0 threshold, reaching 15+ by episode 938. In greedy evaluation (100 test episodes with epsilon=0), the agent achieved an average score of **15.20**, confirming robust performance well above the 13.0 solve condition.
 

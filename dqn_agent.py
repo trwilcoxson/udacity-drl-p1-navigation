@@ -22,6 +22,14 @@ class Agent():
     """Double DQN Agent with Dueling network and experience replay."""
 
     def __init__(self, state_size, action_size, seed):
+        """Initialize an Agent object.
+
+        Params
+        ======
+            state_size (int): dimension of each state
+            action_size (int): dimension of each action
+            seed (int): random seed
+        """
         self.state_size = state_size
         self.action_size = action_size
         self.seed = random.seed(seed)
@@ -66,10 +74,15 @@ class Agent():
             return random.choice(np.arange(self.action_size))
 
     def learn(self, experiences, gamma):
-        """Double DQN learning update.
+        """Update value parameters using given batch of experience tuples.
 
-        Uses the local network to SELECT the best action and the target
-        network to EVALUATE it, reducing Q-value overestimation.
+        Uses Double DQN: the local network SELECTS the best next action,
+        while the target network EVALUATES it, reducing Q-value overestimation.
+
+        Params
+        ======
+            experiences (Tuple[torch.Tensor]): tuple of (s, a, r, s', done) tuples
+            gamma (float): discount factor
         """
         states, actions, rewards, next_states, dones = experiences
 
@@ -88,6 +101,14 @@ class Agent():
         self.soft_update(self.qnetwork_local, self.qnetwork_target, TAU)
 
     def soft_update(self, local_model, target_model, tau):
+        """Soft update model parameters: θ_target = τ*θ_local + (1-τ)*θ_target
+
+        Params
+        ======
+            local_model (PyTorch model): weights will be copied from
+            target_model (PyTorch model): weights will be copied to
+            tau (float): interpolation parameter
+        """
         for target_param, local_param in zip(target_model.parameters(), local_model.parameters()):
             target_param.data.copy_(tau * local_param.data + (1.0 - tau) * target_param.data)
 
@@ -96,6 +117,15 @@ class ReplayBuffer:
     """Fixed-size buffer to store experience tuples."""
 
     def __init__(self, action_size, buffer_size, batch_size, seed):
+        """Initialize a ReplayBuffer object.
+
+        Params
+        ======
+            action_size (int): dimension of each action
+            buffer_size (int): maximum size of buffer
+            batch_size (int): size of each training batch
+            seed (int): random seed
+        """
         self.action_size = action_size
         self.memory = deque(maxlen=buffer_size)
         self.batch_size = batch_size
@@ -104,10 +134,12 @@ class ReplayBuffer:
         self.seed = random.seed(seed)
 
     def add(self, state, action, reward, next_state, done):
+        """Add a new experience to memory."""
         e = self.experience(state, action, reward, next_state, done)
         self.memory.append(e)
 
     def sample(self):
+        """Randomly sample a batch of experiences from memory."""
         experiences = random.sample(self.memory, k=self.batch_size)
 
         states = torch.from_numpy(np.vstack([e.state for e in experiences if e is not None])).float().to(device)
