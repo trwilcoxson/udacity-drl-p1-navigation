@@ -1,0 +1,23 @@
+# Unity environment (too large for git)
+Banana.app/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.eggs/
+*.egg
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Saved scores array (intermediate)
+scores.npy
+
+# Unity log
+unity-environment.log
