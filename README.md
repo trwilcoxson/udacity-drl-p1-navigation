@@ -34,8 +34,8 @@ A Double DQN agent with Dueling network architecture that learns to collect yell
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/trwilcoxson/udacity-drl-p1-navigation.git
-   cd udacity-drl-p1-navigation
+   git clone https://github.com/trwilcoxson/dqn-banana-navigation.git
+   cd dqn-banana-navigation
    ```
 
 2. Create and activate the conda environment:
